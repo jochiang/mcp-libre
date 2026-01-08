@@ -46,6 +46,12 @@ For detailed information, see [`docs/REPOSITORY_STRUCTURE.md`](docs/REPOSITORY_S
 - **Merge Documents**: Combine multiple documents into one
 - **Document Analysis**: Get detailed statistics (word count, sentences, etc.)
 
+### Presentation Tools - NEW! 🎨
+- **Slides to PNG**: Convert all slides to high-quality PNG images
+- **AI Vision Optimized**: Perfect for Claude to visually inspect presentations
+- **Self-Evaluation**: AI can review and improve its own slide designs
+- **Configurable Quality**: 150-300 DPI for different use cases
+
 ### Live Viewing & Real-time Editing
 - **GUI Integration**: Open documents in LibreOffice for live viewing
 - **Real-time Updates**: See changes as AI assistants modify documents
@@ -144,6 +150,7 @@ python src/main.py --test
 | `create_live_editing_session` | Start live editing with real-time preview |
 | `watch_document_changes` | Monitor document changes in real-time |
 | `refresh_document_in_libreoffice` | Force document refresh in GUI |
+| `convert_presentation_to_png` | Convert all slides to PNG images (AI vision optimized) |
 
 ## 📚 Documentation
 
@@ -151,6 +158,7 @@ python src/main.py --test
 - **[Plugin Migration Guide](docs/PLUGIN_MIGRATION_GUIDE.md)**: Migrate from external server to plugin
 - **[Examples](docs/EXAMPLES.md)**: Code examples and usage patterns
 - **[Live Viewing Guide](docs/LIVE_VIEWING_GUIDE.md)**: See changes live in LibreOffice GUI
+- **[Slides to PNG Usage](docs/SLIDES_TO_PNG_USAGE.md)**: Convert slides for AI vision inspection
 - **[Super Assistant Setup](docs/SUPER_ASSISTANT_SETUP.md)**: Chrome extension integration
 - **[ChatGPT Browser Guide](docs/CHATGPT_BROWSER_GUIDE.md)**: Using with ChatGPT and alternatives
 - **[Troubleshooting](docs/TROUBLESHOOTING.md)**: Common issues and solutions

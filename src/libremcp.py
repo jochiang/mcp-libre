@@ -20,6 +20,9 @@ import httpx
 from pydantic import BaseModel, Field
 from mcp.server.fastmcp import FastMCP
 
+# Import slides to PNG converter
+from slides_to_png import convert_slides_to_png, SlideConversionResult
+
 # Initialize FastMCP server
 mcp = FastMCP("LibreOffice MCP Server")
 
@@ -952,6 +955,48 @@ def get_document_statistics(path: str) -> Dict[str, Any]:
             "file_info": doc_info.model_dump(),
             "error": f"Could not analyze content: {str(e)}"
         }
+
+
+# Slides to PNG Conversion
+
+@mcp.tool()
+def convert_presentation_to_png(
+    presentation_path: str,
+    output_dir: str,
+    dpi: int = 200,
+    naming_pattern: str = "slide_{index:03d}.png"
+) -> SlideConversionResult:
+    """Convert all slides in a presentation to individual PNG images.
+
+    Optimized for AI vision inspection - produces high-quality images that
+    accurately represent how slides would appear to humans. Uses LibreOffice's
+    PDF renderer (best quality) then converts to PNG.
+
+    Perfect for Claude to visually inspect and evaluate presentation quality.
+
+    Args:
+        presentation_path: Path to presentation file (.odp, .pptx, .ppt)
+        output_dir: Directory where PNG files will be saved
+        dpi: DPI for output images (default: 200)
+             - 150: Good for most text, smaller files (~500KB/slide)
+             - 200: Recommended for AI vision - sharp text, balanced size (~800KB/slide)
+             - 300: High quality for detailed graphics/small fonts (~1.5MB/slide)
+        naming_pattern: Pattern for output filenames (must include {index})
+
+    Returns:
+        SlideConversionResult with success status and list of generated PNG files
+
+    Example:
+        Ask Claude to create a presentation, then:
+        "Convert the presentation to PNG images so I can review them"
+
+        Claude can then:
+        1. Convert slides to PNG
+        2. Read the PNG files (using vision)
+        3. Self-evaluate the design quality
+        4. Suggest improvements
+    """
+    return convert_slides_to_png(presentation_path, output_dir, dpi, naming_pattern)
 
 
 # Main server entry point
